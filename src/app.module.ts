@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './courses/entities/courses.entity';
 
 @Module({
-  imports: [CoursesModule, DatabaseModule, TypeOrmModule.forFeature([Course])],
+  imports: [CoursesModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })
