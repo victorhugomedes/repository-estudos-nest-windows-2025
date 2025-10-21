@@ -27,7 +27,8 @@ export class CoursesService {
 
     async findOne(id: number){
 
-        //const course = this.courses.find(course => course.id === id);
+        //const course = this.courses.find(course => course.id === id); modo antigo
+        
         const course = await this.courseRepository.findOne({
             where: {id},
             relations: ['tags'],
