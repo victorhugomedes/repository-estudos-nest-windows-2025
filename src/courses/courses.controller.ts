@@ -11,9 +11,9 @@ export class CoursesController {
     }
 
     @Get(':id')
-    async findOne(@Param('id') id: number){
+    async findOne(@Param('id') id: string){
 
-        const cusoExiste = await this.coursesService.findOne(+id);
+        const cusoExiste = await this.coursesService.findOne(id);
 
         if(!cusoExiste){
                     throw new NotFoundException(`Course Id ${id}, not found`);
@@ -28,9 +28,9 @@ export class CoursesController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: number, @Body() body){
+    async update(@Param('id') id: string, @Body() body){
 
-        const cusoExiste = await this.coursesService.findOne(+id);
+        const cusoExiste = await this.coursesService.findOne(id);
 
         if(!cusoExiste){
                     throw new NotFoundException(`Course Id ${id}, not found`);
@@ -40,9 +40,9 @@ export class CoursesController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(':id')
-    remove(@Param('id') id: number){
+    remove(@Param('id') id: string){
 
-        const cusoExiste = this.coursesService.findOne(+id);
+        const cusoExiste = this.coursesService.findOne(id);
 
         if(!cusoExiste){
                     throw new NotFoundException(`Course Id ${id}, not found`);

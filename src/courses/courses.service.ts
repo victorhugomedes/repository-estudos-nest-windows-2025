@@ -25,7 +25,7 @@ export class CoursesService {
 
     }
 
-    async findOne(id: number){
+    async findOne(id: string){
 
         //const course = this.courses.find(course => course.id === id); modo antigo
         
@@ -49,7 +49,7 @@ export class CoursesService {
         return this.courseRepository.save(course)
     }
 
-    async update(id: number, updateCourseDTO: updateCourseDTO){
+    async update(id: string, updateCourseDTO: updateCourseDTO){
         //const existiCourse = this.findOne(id);
         const tags = updateCourseDTO.tags && 
         (await Promise.all(
@@ -78,7 +78,7 @@ export class CoursesService {
         }*/
     }
 
-    async remove(id: number){
+    async remove(id: string){
         //const index = this.remove.findIndex(Course => Course.id === id)
         const course = await this.courseRepository.findOne({
             where: {id}
