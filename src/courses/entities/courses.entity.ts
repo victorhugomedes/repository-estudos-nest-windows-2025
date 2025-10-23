@@ -5,7 +5,7 @@ import { timestamp } from "rxjs"
 
 
 
-@Entity('course')
+@Entity('courses')
 export class Course{
     
     //Determina que o id será criado automaticamnete pelo banco de dados 
@@ -18,13 +18,14 @@ export class Course{
     @Column()
     description: string
     
-    @JoinTable()
-    @ManyToMany(() => Tag, tag => tag.course, {
-        cascade: true,
+   @ManyToMany(() => Tag, tag => tag.courses, { cascade: true })
+    @JoinTable({
+    name: 'courses_tags_tags', //  precisa bater com a migration
+    joinColumn: { name: 'coursesId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'tagsId', referencedColumnName: 'id' },
     })
+    tags: Tag[];
         
-    tags: Tag[] 
-
     @CreateDateColumn({type: 'timestamp'})
     created_at: Date
 

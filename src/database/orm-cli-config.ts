@@ -12,8 +12,8 @@ export const dataSource = new DataSource({
     ...dataSourceOptions, 
     synchronize: false, 
     migrations: [CreateCourseTable1760973186107,
-          CreateTagsTable1761135004685,
-          CreateCoursesTagsTable1761140315058, 
+        CreateTagsTable1761135004685,
+        CreateCoursesTagsTable1761140315058, 
         AddCoursesIdToCoursesTagsTable1761141832587, 
         AddTagsIdToCoursesTagsTable1761154269034],
 })

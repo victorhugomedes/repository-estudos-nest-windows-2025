@@ -10,8 +10,8 @@ export class Tag {
     @Column()
     name: string
     
-    @ManyToMany(() => Course, course => course.tags)
-    course: Course[]
+    @ManyToMany(() => Course, courses => courses.tags)
+    courses: Course[]
 
     @CreateDateColumn({type: 'timestamp'})
     created_at: Date
