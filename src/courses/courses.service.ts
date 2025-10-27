@@ -3,20 +3,20 @@ import { Course } from './entities/courses.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './entities/tag.entity';
-import { createCourseDTO } from './dto/create-course.dto';
-import { updateCourseDTO } from './dto/update-course.dto';
+import { CreateCourseDTO } from './dto/create-course.dto';
+import { UpdateCourseDTO } from './dto/update-course.dto';
 
 
 @Injectable()
 export class CoursesService {
 
-    constructor(
-         @InjectRepository(Course)
-         private readonly courseRepository: Repository<Course>,
+   
+    @InjectRepository(Course)
+    private readonly courseRepository: Repository<Course>
 
-        @InjectRepository(Tag)
-         private readonly tageRepository: Repository<Tag>,
-    ){}
+    @InjectRepository(Tag)
+    private readonly tageRepository: Repository<Tag>
+    
    
     async findAll(){
         return this.courseRepository.find({
@@ -38,7 +38,7 @@ export class CoursesService {
     }
 
 
-    async create(createCourseDTO: createCourseDTO){
+    async create(createCourseDTO: CreateCourseDTO){
         const tags = await Promise.all(
             createCourseDTO.tags.map(name => this.preloadTagName(name)), 
         )
@@ -49,7 +49,7 @@ export class CoursesService {
         return this.courseRepository.save(course)
     }
 
-    async update(id: string, updateCourseDTO: updateCourseDTO){
+    async update(id: string, updateCourseDTO: UpdateCourseDTO){
         //const existiCourse = this.findOne(id);
         const tags = updateCourseDTO.tags && 
         (await Promise.all(
