@@ -10,7 +10,7 @@ describe('CoursesService unit test', () => {
   let create_at: Date
   let expectOutPutTags: any
   let expectOutPutCourses: any
-  let mockCoursesRepositoy: any
+  let mockCoursesRepository: any
   let mockTagRepository: any
 
   beforeEach(async () => {
@@ -33,7 +33,7 @@ describe('CoursesService unit test', () => {
       tags: expectOutPutTags
     }
 
-    mockCoursesRepositoy = {
+    mockCoursesRepository = {
       create : jest.fn().mockReturnValue(Promise.resolve(expectOutPutCourses)),
       save: jest.fn().mockReturnValue(Promise.resolve(expectOutPutCourses)),
       update: jest.fn().mockReturnValue(Promise.resolve(expectOutPutCourses)),
@@ -52,7 +52,7 @@ describe('CoursesService unit test', () => {
 
   it('should create a course', async() => {
   //@ts-expect-error defined part of methods  
-  service['courseRepository'] = mockCoursesRepositoy
+  service['courseRepository'] = mockCoursesRepository
 
   //@ts-expect-error defined part of methods
   service['tageRepository'] = mockTagRepository
@@ -65,35 +65,35 @@ describe('CoursesService unit test', () => {
 
   const newCourse = await service.create(createCourseDTO);
 
-  expect(mockCoursesRepositoy.save).toHaveBeenCalled();
+  expect(mockCoursesRepository.save).toHaveBeenCalled();
   expect(expectOutPutCourses).toStrictEqual(newCourse);
   });
 
 
   it('should list all courses', async() => {
   //@ts-expect-error defined part of methods  
-  service['courseRepository'] = mockCoursesRepositoy
+  service['courseRepository'] = mockCoursesRepository
 
   //@ts-expect-error defined part of methods
   service['tageRepository'] = mockTagRepository
 
   const courses = await service.findAll();
 
-  expect(mockCoursesRepositoy.find).toHaveBeenCalled();
+  expect(mockCoursesRepository.find).toHaveBeenCalled();
   expect(expectOutPutCourses).toStrictEqual(courses);
   });
 
 
   it('should gets a course by id', async() => {
   //@ts-expect-error defined part of methods  
-  service['courseRepository'] = mockCoursesRepositoy
+  service['courseRepository'] = mockCoursesRepository
 
   //@ts-expect-error defined part of methods
   service['tageRepository'] = mockTagRepository
 
   const course = await service.findOne(id);
 
-  expect(mockCoursesRepositoy.findOne).toHaveBeenCalled();
+  expect(mockCoursesRepository.findOne).toHaveBeenCalled();
   expect(expectOutPutCourses).toStrictEqual(course);
   });
 
@@ -101,7 +101,7 @@ describe('CoursesService unit test', () => {
   
   it('should update a course', async() => {
   //@ts-expect-error defined part of methods  
-  service['courseRepository'] = mockCoursesRepositoy
+  service['courseRepository'] = mockCoursesRepository
 
   //@ts-expect-error defined part of methods
   service['tageRepository'] = mockTagRepository
@@ -114,8 +114,23 @@ describe('CoursesService unit test', () => {
 
   const course = await service.update(id, updateCourseDTO);
 
-  expect(mockCoursesRepositoy.save).toHaveBeenCalled();
-  expect(mockCoursesRepositoy.preload).toHaveBeenCalled();
+  expect(mockCoursesRepository.save).toHaveBeenCalled();
+  expect(mockCoursesRepository.preload).toHaveBeenCalled();
+  expect(expectOutPutCourses).toStrictEqual(course);
+  });
+
+
+  it('should delete a course', async() => {
+  //@ts-expect-error defined part of methods  
+  service['courseRepository'] = mockCoursesRepository
+
+  //@ts-expect-error defined part of methods
+  service['tageRepository'] = mockTagRepository
+
+  const course = await service.remove(id);
+
+  expect(mockCoursesRepository.findOne).toHaveBeenCalled();
+  expect(mockCoursesRepository.remove).toHaveBeenCalled()
   expect(expectOutPutCourses).toStrictEqual(course);
   });
 
