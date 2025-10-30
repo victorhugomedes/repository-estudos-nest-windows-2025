@@ -70,7 +70,7 @@ describe('CoursesController e2e tests', () => {
 
   describe('POST/ courses', () => {
     it('should create a course', async() => {
-        const res = await request(app.getHttpServer)
+        const res = await request(app.getHttpServer())
         .post('/courses')
         .send(data)
         .expect(201)
